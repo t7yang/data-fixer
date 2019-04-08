@@ -5,11 +5,13 @@ A tool for check and fix data with schema, inspired by angular reactive form.
 ### Installation
 
 npm:
+
 ```bash
 $ npm install data-fixer
 ```
 
 yarn:
+
 ```bash
 $ yarn add data-fixer
 ```
@@ -26,6 +28,7 @@ Several "validators" can help you to check the value validity:
 
 - `isType`: check value type (`Number`, `String`, `Boolean`, `Object`, `Array`).
 - `isEq`: check is value equal to specify value.
+- `isOneOf`: check is value match one of candidates.
 - `isGt`: check is value great than specify value.
 - `isLt`: check is value least than specify value.
 - `isGte`: check is value great than or equal specify value.
@@ -36,6 +39,7 @@ Several "validators" can help you to check the value validity:
 - `or`: combine 2+ validator with logic "or".
 
 `vctrl` demo
+
 ```javascript
 import { vctrl, isEq, isType, isGt, or } from 'data-fixer';
 
@@ -63,9 +67,14 @@ const holder2 = isIndex(-2);
 holder.valid; // false
 holder.invalid; // true
 holder.getValue(); // 0
+
+// isOneOf is a shorthand of combination of or and isEq
+const isColor1 = vctrl(or([isEq('black'), isEq('red')]));
+const isColor2 = vctrl(isOneOf(['black', 'red']));
 ```
 
 `actrl` demo
+
 ```javascript
 import { actrl, vctrl, isType } from 'data-fixer';
 
@@ -76,9 +85,16 @@ const holder = isAllNumber([1, 2, 3, '4']);
 holder.valid; // false
 holder.invalid; // true
 holder.getValue(); // [1, 2, 3, 1]
+
+// actrl can handle for object that care only for its value type
+const holder2 = isAllNumber({ a: 1, b: 2, c: 3, d: '4' });
+holder2.valid; // false
+holder2.invalid; // true
+holder2.getValue(); // { a: 1, b: 2, c: 3, d: 1 }
 ```
 
 `octrl` demo
+
 ```javascript
 import { octrl, vctrl, isEq, isType } from 'data-fixer';
 
@@ -87,7 +103,7 @@ const isConfig = octrl({
   menus: octrl({
     enabled: vctrl(isType(Boolean), false),
     clipboard: vctrl(isType(Boolean), true),
-  })
+  }),
 });
 
 const holder = isConfig({});
