@@ -26,4 +26,11 @@ describe('test for actrl', () => {
     expect(holder.invalid).toBe(false);
     expect(holder.getValue()).toEqual([]);
   });
+
+  it('actrl should pass object input case', () => {
+    const holder = isGroupGt0({ a: 0, b: 1, c: 2 });
+    expect(holder.valid).toBe(false);
+    expect(holder.invalid).toBe(true);
+    expect(holder.getValue()).toEqual({ a: 1, b: 1, c: 2 });
+  });
 });
