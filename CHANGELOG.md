@@ -1,5 +1,10 @@
 # Data Fixer Changelog
 
+### v1.1.1
+
+- Hotfix
+  - Export `isOneOf`.
+
 ### v1.1.0
 
 - Update
