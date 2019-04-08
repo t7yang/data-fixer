@@ -1,14 +1,7 @@
 import { all, map, not, prop, values } from 'ramda';
 import { isType } from '../validators/is-type';
 import { Control, Holder } from './type';
-
-const devolve = (struc: Record<string, Control<any>>, raw: any = {}) => {
-  const result: Record<string, any> = {};
-  Object.entries(struc).forEach(([key, ctrl]) => {
-    result[key] = ctrl(raw[key]);
-  });
-  return result;
-};
+import { devolve } from './_devolve';
 
 type ObjectControl = (struc: Record<string, Control<any>>) => Control<any>;
 

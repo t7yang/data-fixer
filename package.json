@@ -2,6 +2,22 @@
   "name": "data-fixer",
   "version": "1.0.0",
   "description": "a tool to check and fix data with schema, inspired by angular reactive form.",
+  "author": "t7yang <t7yang@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:t7yang/data-fixer.git"
+  },
+  "keywords": [
+    "data-fixer",
+    "schema",
+    "fix"
+  ],
+  "sideEffects": false,
+  "files": [
+    "dist/cjs",
+    "dist/esm"
+  ],
   "main": "dist/cjs/index.js",
   "types": "dist/cjs/index.d.ts",
   "module": "dist/esm/index.js",
@@ -14,9 +30,6 @@
     "build:all": "npm run build:esm && npm run build:cjs",
     "build": "npm run build:all"
   },
-  "keywords": [],
-  "author": "t7yang <t7yang@gmail.com>",
-  "license": "ISC",
   "dependencies": {
     "ramda": "^0.26.1"
   },

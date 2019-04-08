@@ -4,6 +4,20 @@ A tool for check and fix data with schema, inspired by angular reactive form.
 
 ### Installation
 
+npm:
+```bash
+$ npm install data-fixer
+```
+
+yarn:
+```bash
+$ yarn add data-fixer
+```
+
+### Type Definition
+
+This project develop with TypeScript, type is build-in with publish.
+
 ### Usage
 
 There are three "Controllers" which `vctrl` for primivite value, `actrl` for array, and `octrl` for object.
