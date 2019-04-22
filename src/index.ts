@@ -1,2 +1,2 @@
-export * from './containers';
+export * from './controllers';
 export * from './validators';
