@@ -1,5 +1,11 @@
 # Data Fixer Changelog
 
+### v.1.1.3
+
+- Fix
+  - `actrl` can properly handle for void input.
+  - `octrl` can properly handle for none Object input.
+
 ### v1.1.2
 
 - Hotfix
