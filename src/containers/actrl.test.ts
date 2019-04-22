@@ -33,4 +33,11 @@ describe('test for actrl', () => {
     expect(holder.invalid).toBe(true);
     expect(holder.getValue()).toEqual({ a: 1, b: 1, c: 2 });
   });
+
+  it('actrl should return empty array if void input', () => {
+    const holder = isGroupGt0(null);
+    expect(holder.valid).toBe(false);
+    expect(holder.invalid).toBe(true);
+    expect(holder.getValue()).toEqual([]);
+  });
 });
