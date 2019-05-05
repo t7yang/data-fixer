@@ -33,20 +33,4 @@ describe('octrl should pass test', () => {
     expect(holder.invalid).toBe(true);
     expect(holder.getValue()).toEqual(DEF);
   });
-
-  it('octrl should return empty object if validator is empty', () => {
-    const ctrl = octrl({});
-    const holder = ctrl({});
-    expect(holder.valid).toBe(true);
-    expect(holder.invalid).toBe(false);
-    expect(holder.getValue()).toEqual({});
-  });
-
-  it('octrl should report invalid if validator is empty with invalid input', () => {
-    const ctrl = octrl({});
-    const holder = ctrl({ a: 1 });
-    expect(holder.valid).toBe(false);
-    expect(holder.invalid).toBe(true);
-    expect(holder.getValue()).toEqual({});
-  });
 });
