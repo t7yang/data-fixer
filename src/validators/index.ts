@@ -1,5 +1,4 @@
 export * from './is-eq';
-export * from './is-eq-with';
 export * from './is-gt';
 export * from './is-gte';
 export * from './is-leq';
@@ -9,5 +8,6 @@ export * from './is-lt';
 export * from './is-one-of';
 export * from './is-patt';
 export * from './is-type';
+export * from './is-vd-with';
 export * from './or';
 export * from './type';
