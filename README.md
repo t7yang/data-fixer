@@ -37,6 +37,7 @@ Several "validators" can help you to check the value validity:
 - `isLlt`: check is value length least than specify value.
 - `isPatt`: check is value fit the regex pattern.
 - `or`: combine 2+ validator with logic "or".
+- `isVdWith`: able to receive a custom validate function to check value.
 
 `vctrl` demo
 
@@ -85,12 +86,21 @@ const holder = isAllNumber([1, 2, 3, '4']);
 holder.valid; // false
 holder.invalid; // true
 holder.getValue(); // [1, 2, 3, 1]
+```
 
-// actrl can handle for object that care only for its value type
-const holder2 = isAllNumber({ a: 1, b: 2, c: 3, d: '4' });
-holder2.valid; // false
-holder2.invalid; // true
-holder2.getValue(); // { a: 1, b: 2, c: 3, d: 1 }
+`dctrl` demo
+
+```javascript
+import { dctrl, vctrl, isType } from 'data-fixer';
+
+const isNumber = vctrl(isType(Number), 1);
+const isAllNumber = dctrl(isNumber);
+
+// dctrl can handle for object that care only for its value type
+const holder = isAllNumber({ a: 1, b: 2, c: 3, d: '4' });
+holder.valid; // false
+holder.invalid; // true
+holder.getValue(); // { a: 1, b: 2, c: 3, d: 1 }
 ```
 
 `octrl` demo
@@ -112,6 +122,22 @@ holder.invalid; // true
 holder.getValue(); // { version: 2, menus: { enabled: false, clipboard: true } }
 ```
 
+`tctrl` demo
+
+```javascript
+import { tctrl, vctrl, isType } from 'data-fixer';
+
+const isNumber = vctrl(isType(Number), 1);
+const isString = vctrl(isType(String), 'a');
+const isNumberString = tctrl([isNumber, isString]);
+
+// tctrl can check tuple type array
+const holder = isNumberString([1, 1]);
+holder.valid; // false
+holder.invalid; // true
+holder.getValue(); // [1, 'a']
+```
+
 ### Caution
 
-Becareful for type coercion in JavaScript, for example `isGt(0, '123') === true`, you should handle you self by checking the type correctness.
+Becareful for type coercion in JavaScript, for example `isGt(0)('123') === true`, you should handle you self by checking the type correctness.

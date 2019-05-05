@@ -1,6 +1,6 @@
 {
   "name": "data-fixer",
-  "version": "1.1.3",
+  "version": "2.0.0",
   "description": "a tool to check and fix data with schema, inspired by angular reactive form.",
   "author": "t7yang <t7yang@gmail.com>",
   "license": "MIT",
@@ -26,10 +26,11 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:tsc": "tsc --noEmit",
+    "clean": "rm -fr dist",
     "build:esm": "tsc --build tsconfig.esm.json",
     "build:cjs": "tsc --build tsconfig.cjs.json",
     "build:all": "npm run build:esm && npm run build:cjs",
-    "build": "npm run build:all"
+    "build": "npm run clean && npm run build:all"
   },
   "dependencies": {
     "ramda": "^0.26.1"
