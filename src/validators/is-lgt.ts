@@ -1,5 +1,5 @@
 import { isGt } from './is-gt';
+import { checkLengthWith } from './shared/check-length-with';
 import { VdtFnFac } from './type';
-import { checkLengthWith } from './_check-length-with';
 
 export const isLgt: VdtFnFac<number> = checkLengthWith(isGt);

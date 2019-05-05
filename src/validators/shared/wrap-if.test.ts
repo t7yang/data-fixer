@@ -1,4 +1,4 @@
-import { wrapIf } from './_wrap-if';
+import { wrapIf } from './wrap-if';
 
 describe('wrapIf should pass test', () => {
   it('wrapIf should return [] with viod argument', () => {

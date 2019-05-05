@@ -1,6 +1,6 @@
 import { all, ap, not, of } from 'ramda';
+import { wrapIf } from '../../validators/shared/wrap-if';
 import { VdtFn } from '../../validators/type';
-import { wrapIf } from '../../validators/_wrap-if';
 import { Control } from '../type';
 import { getAlt } from './get-alt';
 

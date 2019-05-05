@@ -1,5 +1,5 @@
 import { call, identity, prop, useWith } from 'ramda';
-import { VdtFnFac } from './type';
+import { VdtFnFac } from '../type';
 
 type CheckLengthWith = (f: VdtFnFac<number>) => VdtFnFac<number>;
 
