@@ -2,40 +2,33 @@ import { isGt } from '../../validators';
 import { vctrl } from '../vctrl/vctrl';
 import { actrl } from './actrl';
 
-const isGt0 = vctrl(isGt(0), 1);
-const isGroupGt0 = actrl(isGt0);
-
 describe('test for actrl', () => {
-  it('actrl should pass valid case', () => {
+  const isGt0 = vctrl(isGt(0), 1);
+  const isGroupGt0 = actrl(isGt0);
+
+  it('actrl should return given value if valid', () => {
     const holder = isGroupGt0([1, 2, 3, 4, 5]);
     expect(holder.valid).toBe(true);
     expect(holder.invalid).toBe(false);
     expect(holder.getValue()).toEqual([1, 2, 3, 4, 5]);
   });
 
-  it('actrl should pass invalid case', () => {
+  it('actrl should return rectify array if given value invalid', () => {
     const holder = isGroupGt0([-1, 0, 1, 2, -1]);
     expect(holder.valid).toBe(false);
     expect(holder.invalid).toBe(true);
     expect(holder.getValue()).toEqual([1, 1, 1, 2, 1]);
   });
 
-  it('actrl should pass empty array input case', () => {
+  it('actrl should pass empty array as given value', () => {
     const holder = isGroupGt0([]);
     expect(holder.valid).toBe(true);
     expect(holder.invalid).toBe(false);
     expect(holder.getValue()).toEqual([]);
   });
 
-  it('actrl should pass object input case', () => {
-    const holder = isGroupGt0({ a: 0, b: 1, c: 2 });
-    expect(holder.valid).toBe(false);
-    expect(holder.invalid).toBe(true);
-    expect(holder.getValue()).toEqual({ a: 1, b: 1, c: 2 });
-  });
-
-  it('actrl should return empty array if void input', () => {
-    const holder = isGroupGt0(null);
+  it('actrl should return empty array if given type not array', () => {
+    const holder = isGroupGt0({});
     expect(holder.valid).toBe(false);
     expect(holder.invalid).toBe(true);
     expect(holder.getValue()).toEqual([]);
