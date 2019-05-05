@@ -1,5 +1,5 @@
 import { all, is, map, not, pipe, pluck } from 'ramda';
-import { Control, Holder } from './type';
+import { Control, Holder } from '../type';
 
 type ArrayControl = <T>(ctrl: Control<T>) => Control<T, T[] | Record<string, T>>;
 

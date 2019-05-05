@@ -1,6 +1,6 @@
-import { isGt } from '../validators';
+import { isGt } from '../../validators';
+import { vctrl } from '../vctrl/vctrl';
 import { actrl } from './actrl';
-import { vctrl } from './vctrl';
 
 const isGt0 = vctrl(isGt(0), 1);
 const isGroupGt0 = actrl(isGt0);

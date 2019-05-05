@@ -1,6 +1,6 @@
-import { isEq, isType } from '../validators';
+import { isEq, isType } from '../../validators';
+import { vctrl } from '../vctrl/vctrl';
 import { octrl } from './octrl';
-import { vctrl } from './vctrl';
 
 describe('octrl should pass test', () => {
   const ctrl = octrl({

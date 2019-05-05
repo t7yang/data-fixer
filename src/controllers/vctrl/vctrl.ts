@@ -1,7 +1,7 @@
 import { all, ap, not, of } from 'ramda';
-import { VdtFn } from '../validators/type';
-import { wrapIf } from '../validators/_wrap-if';
-import { Control } from './type';
+import { VdtFn } from '../../validators/type';
+import { wrapIf } from '../../validators/_wrap-if';
+import { Control } from '../type';
 
 type ValueControl = <T>(vdt: VdtFn | VdtFn[], alt: T) => Control<T>;
 

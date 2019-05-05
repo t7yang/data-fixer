@@ -1,6 +1,6 @@
 import { all, equals, gt, is, length, map, not, prop, values } from 'ramda';
-import { Control, Holder } from './type';
-import { devolve } from './_devolve';
+import { devolve } from '../shared/devolve';
+import { Control, Holder } from '../type';
 
 type ObjectControl = (struc: Record<string, Control<any>>) => Control<any>;
 

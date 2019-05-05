@@ -1,4 +1,4 @@
-import { isGt } from '../validators';
+import { isGt } from '../../validators';
 import { vctrl } from './vctrl';
 
 const alt = 1;
