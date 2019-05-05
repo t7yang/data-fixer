@@ -111,3 +111,7 @@ holder.valid; // false
 holder.invalid; // true
 holder.getValue(); // { version: 2, menus: { enabled: false, clipboard: true } }
 ```
+
+### Caution
+
+Becareful for type coercion in JavaScript, for example `isGt(0, '123') === true`, you should handle you self by checking the type correctness.
