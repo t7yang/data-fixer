@@ -1,4 +1,5 @@
 export * from './is-eq';
+export * from './is-eq-with';
 export * from './is-gt';
 export * from './is-gte';
 export * from './is-leq';
