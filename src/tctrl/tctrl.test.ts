@@ -1,9 +1,11 @@
-import { isEq } from '../../validators';
 import { vctrl } from '../vctrl/vctrl';
 import { tctrl } from './tctrl';
 
 describe('test for tctrl', () => {
-  const isOnOff = tctrl([vctrl(isEq('on'), 'on'), vctrl(isEq('off'), 'off')]);
+  const isOnOff = tctrl([
+    vctrl({ type: 'string', const: 'on' }, 'on'),
+    vctrl({ type: 'string', const: 'off' }, 'off'),
+  ]);
 
   it('tctrl should return given value if valid', () => {
     const holder = isOnOff(['on', 'off']);
@@ -13,7 +15,7 @@ describe('test for tctrl', () => {
   });
 
   it('tctrl should return rectify tuple if invalid', () => {
-    const holder = isOnOff([1, 2]);
+    const holder = isOnOff(['off', 2]);
     expect(holder.valid).toBe(false);
     expect(holder.invalid).toBe(true);
     expect(holder.getValue()).toEqual(['on', 'off']);

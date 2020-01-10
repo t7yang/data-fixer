@@ -3,7 +3,7 @@
     /* Basic Options */
     "target": "es5",
     "module": "commonjs",
-    "lib": ["esnext"],
+    "lib": ["esnext", "dom"],
     "declaration": true,
     "sourceMap": true,
     "rootDir": "./src",

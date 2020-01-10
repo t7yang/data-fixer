@@ -4,4 +4,4 @@ export type Holder<T> = {
   getValue: () => T;
 };
 
-export type Control<T, U = T> = (v: any) => Holder<U>;
+export type Control<T> = (v: any) => Holder<T>;

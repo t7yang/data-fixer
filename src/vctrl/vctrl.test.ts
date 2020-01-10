@@ -1,11 +1,10 @@
-import { isGt } from '../../validators';
 import { vctrl } from './vctrl';
 
 describe('test for vctrl when alt if not a function', () => {
   const alt = 1;
-  const isGtZero = vctrl(isGt(0), alt);
+  const isGtZero = vctrl({ type: 'number', exclusiveMinimum: 0 }, alt);
 
-  it('vctrl should should return given value if valid', () => {
+  it('vctrl should return given value if valid', () => {
     const target = 5;
     const holder = isGtZero(target);
     expect(holder.valid).toBe(true);
@@ -14,7 +13,7 @@ describe('test for vctrl when alt if not a function', () => {
   });
 
   it('vctrl should return alt if given value not valid', () => {
-    const target = -1;
+    const target = 0;
     const holder = isGtZero(target);
     expect(holder.valid).toBe(false);
     expect(holder.invalid).toBe(true);
@@ -24,7 +23,7 @@ describe('test for vctrl when alt if not a function', () => {
 
 describe('test for vctrl when alt is function', () => {
   const altFn = (p: any) => (typeof p === 'number' ? Math.abs(p) + 1 : 1);
-  const isGtZero = vctrl(isGt(0), altFn);
+  const isGtZero = vctrl({ type: 'number', minimum: 0 }, altFn);
 
   it('vctrl should return given value if valid', () => {
     const holder = isGtZero(2);
