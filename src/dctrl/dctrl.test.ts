@@ -18,7 +18,7 @@ describe('dctrl should pass test', () => {
 
     expect(holder.valid).toBe(true);
     expect(holder.invalid).toBe(false);
-    expect(holder.getValue()).toEqual(original);
+    expect(holder.value()).toEqual(original);
   });
 
   it('dctrl should return fixed object if value invalid', () => {
@@ -26,7 +26,7 @@ describe('dctrl should pass test', () => {
 
     expect(holder.valid).toBe(false);
     expect(holder.invalid).toBe(true);
-    expect(holder.getValue()).toEqual(DEFAULT);
+    expect(holder.value()).toEqual(DEFAULT);
   });
 
   it('dctrl should return default object if key invalid', () => {
@@ -34,6 +34,6 @@ describe('dctrl should pass test', () => {
 
     expect(holder.valid).toBe(false);
     expect(holder.invalid).toBe(true);
-    expect(holder.getValue()).toEqual(DEFAULT);
+    expect(holder.value()).toEqual(DEFAULT);
   });
 });

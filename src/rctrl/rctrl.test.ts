@@ -8,27 +8,27 @@ describe('test for rctrl', () => {
     const holder = isOnOff({ a: 'on', b: 'off', c: 'on' });
     expect(holder.valid).toBe(true);
     expect(holder.invalid).toBe(false);
-    expect(holder.getValue()).toEqual({ a: 'on', b: 'off', c: 'on' });
+    expect(holder.value()).toEqual({ a: 'on', b: 'off', c: 'on' });
   });
 
   it('rctrl should return rectify object if invalid', () => {
     const holder = isOnOff({ a: 'on', b: 'off', c: 123 });
     expect(holder.valid).toBe(false);
     expect(holder.invalid).toBe(true);
-    expect(holder.getValue()).toEqual({ a: 'on', b: 'off', c: 'on' });
+    expect(holder.value()).toEqual({ a: 'on', b: 'off', c: 'on' });
   });
 
   it('rctrl should return empty object if empty schema given', () => {
     const holder = isOnOff({});
     expect(holder.valid).toBe(true);
     expect(holder.invalid).toBe(false);
-    expect(holder.getValue()).toEqual({});
+    expect(holder.value()).toEqual({});
   });
 
   it('rctrl should return empty object if given type not object', () => {
     const holder = isOnOff([]);
     expect(holder.valid).toBe(false);
     expect(holder.invalid).toBe(true);
-    expect(holder.getValue()).toEqual({});
+    expect(holder.value()).toEqual({});
   });
 });

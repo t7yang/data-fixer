@@ -9,7 +9,7 @@ describe('test for vctrl when alt if not a function', () => {
     const holder = isGtZero(target);
     expect(holder.valid).toBe(true);
     expect(holder.invalid).toBe(false);
-    expect(holder.getValue()).toBe(5);
+    expect(holder.value()).toBe(5);
   });
 
   it('vctrl should return alt if given value not valid', () => {
@@ -17,7 +17,7 @@ describe('test for vctrl when alt if not a function', () => {
     const holder = isGtZero(target);
     expect(holder.valid).toBe(false);
     expect(holder.invalid).toBe(true);
-    expect(holder.getValue()).toBe(alt);
+    expect(holder.value()).toBe(alt);
   });
 });
 
@@ -29,20 +29,20 @@ describe('test for vctrl when alt is function', () => {
     const holder = isGtZero(2);
     expect(holder.valid).toBe(true);
     expect(holder.invalid).toBe(false);
-    expect(holder.getValue()).toBe(2);
+    expect(holder.value()).toBe(2);
   });
 
   it('vctrl should return 1 if given value not type number', () => {
     const holder = isGtZero('asdf');
     expect(holder.valid).toBe(false);
     expect(holder.invalid).toBe(true);
-    expect(holder.getValue()).toBe(1);
+    expect(holder.value()).toBe(1);
   });
 
   it('vctrl should return abs + 1 if given value is type number', () => {
     const holder = isGtZero(-7);
     expect(holder.valid).toBe(false);
     expect(holder.invalid).toBe(true);
-    expect(holder.getValue()).toBe(8);
+    expect(holder.value()).toBe(8);
   });
 });

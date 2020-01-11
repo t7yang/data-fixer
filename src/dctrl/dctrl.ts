@@ -7,15 +7,15 @@ type DictionaryControl = <T extends Record<string, Control<any>>>(
   schema: T,
 ) => Control<{ [P in keyof T]: T[P] extends Control<infer U> ? U : never }>;
 
-export const dctrl: DictionaryControl = schema => value => {
-  const isObject = !isNotObject(value);
-  const isPropsMatch = isObject && Object.keys(schema).length === Object.keys(value).length;
-  const subject: Record<string, any> = isObject ? value : {};
+export const dctrl: DictionaryControl = schema => data => {
+  const isObject = !isNotObject(data);
+  const isPropsMatch = isObject && Object.keys(schema).length === Object.keys(data).length;
+  const subject: Record<string, any> = isObject ? data : {};
   const sHolder = devolve(schema, subject);
 
   const valid = isPropsMatch && Object.values(sHolder).every(h => h.valid);
   const invalid = !valid;
-  const getValue = () => (valid ? value : objMap((h: Holder<any>) => h.getValue(), sHolder));
+  const value = () => (valid ? data : objMap((h: Holder<any>) => h.value(), sHolder));
 
-  return { valid, invalid, getValue };
+  return { valid, invalid, value };
 };

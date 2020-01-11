@@ -4,14 +4,14 @@ import { Control } from '../type';
 
 type RecordControl = <T>(ctrl: Control<T>) => Control<Record<string, T>>;
 
-export const rctrl: RecordControl = ctrl => value => {
-  if (isNotObject(value)) return { valid: false, invalid: true, getValue: () => ({}) };
+export const rctrl: RecordControl = ctrl => data => {
+  if (isNotObject(data)) return { valid: false, invalid: true, value: () => ({}) };
 
-  const holders = objMap(ctrl, value);
+  const holders = objMap(ctrl, data);
 
   const valid = Object.values(holders).every(h => h.valid);
   const invalid = !valid;
-  const getValue = () => (valid ? value : objMap(h => h.getValue(), holders));
+  const value = () => (valid ? data : objMap(h => h.value(), holders));
 
-  return { valid, invalid, getValue };
+  return { valid, invalid, value };
 };

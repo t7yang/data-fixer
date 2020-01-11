@@ -2,16 +2,16 @@ import { Control } from '../type';
 
 type ArrayControl = <T>(ctrl: Control<T>) => Control<T[]>;
 
-export const actrl: ArrayControl = ctrl => value => {
-  const isArray = Array.isArray(value);
+export const actrl: ArrayControl = ctrl => data => {
+  const isArray = Array.isArray(data);
 
-  if (!isArray) return { valid: false, invalid: true, getValue: () => [] };
+  if (!isArray) return { valid: false, invalid: true, value: () => [] };
 
-  const holders = (value as Array<any>).map(ctrl);
+  const holders = (data as Array<any>).map(ctrl);
 
   const valid = holders.every(h => h.valid);
   const invalid = !valid;
-  const getValue = () => (valid ? value : holders.map(({ getValue }) => getValue()));
+  const value = () => (valid ? data : holders.map(({ value }) => value()));
 
-  return { valid, invalid, getValue };
+  return { valid, invalid, value };
 };
