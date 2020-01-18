@@ -3,7 +3,7 @@ import { isNotObject } from '../shared/is-not-object';
 import { objMap } from '../shared/obj-map';
 import { Control, Holder } from '../type';
 
-type DictionaryControl = <T extends Record<string, Control<any>>>(
+type DictionaryControl = <T extends Record<keyof T, Control<any>>>(
   schema: T,
 ) => Control<{ [P in keyof T]: T[P] extends Control<infer U> ? U : never }>;
 
