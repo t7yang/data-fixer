@@ -2,10 +2,10 @@ import { vctrl } from '../vctrl/vctrl';
 import { tctrl } from './tctrl';
 
 describe('test for tctrl', () => {
-  const isOnOff = tctrl([
+  const isOnOff = tctrl(
     vctrl({ type: 'string', const: 'on' }, 'on'),
     vctrl({ type: 'string', const: 'off' }, 'off'),
-  ]);
+  );
 
   it('tctrl should return given value if valid', () => {
     const holder = isOnOff(['on', 'off']);

@@ -1,10 +1,8 @@
-import { Control } from '../type';
+import { Control, ExtractControlsValue } from '../type';
 
-type TupleControl = <T extends Control<any>[]>(
-  ctrls: T,
-) => Control<T extends Control<infer R>[] ? R[] : never>;
+type TupleControl = <T extends Control<any>[]>(...ctrls: T) => Control<ExtractControlsValue<T>>;
 
-export const tctrl: TupleControl = ctrls => data => {
+export const tctrl: TupleControl = (...ctrls) => data => {
   const isArray = Array.isArray(data);
   const subject: any[] = isArray ? data : [];
   const isLengthMatch = isArray && ctrls.length === data.length;
