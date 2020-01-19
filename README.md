@@ -1,6 +1,6 @@
 # Data Fixer
 
-A tool for check and fix data with schema, inspired by angular reactive form.
+A tool for check and fix data with json schema, inspired by angular reactive form.
 
 ### Installation
 
@@ -22,122 +22,110 @@ This project develop with TypeScript, type is build-in with publish.
 
 ### Usage
 
-There are three "Controllers" which `vctrl` for primivite value, `actrl` for array, and `octrl` for object.
+There are three "Controllers" which `vctrl` for primivite value, `actrl` for array, `dctrl` for Dictionary, `rctrl` for Record, and `tctrl` for tuple.
 
-Several "validators" can help you to check the value validity:
-
-- `isType`: check value type (`Number`, `String`, `Boolean`, `Object`, `Array`).
-- `isEq`: check is value equal to specify value.
-- `isOneOf`: check is value match one of candidates.
-- `isGt`: check is value great than specify value.
-- `isLt`: check is value least than specify value.
-- `isGte`: check is value great than or equal specify value.
-- `isLte`: check is value least than or equal specify value.
-- `isLgt`: check is value length great than specify value.
-- `isLlt`: check is value length least than specify value.
-- `isPatt`: check is value fit the regex pattern.
-- `or`: combine 2+ validator with logic "or".
-- `isVdWith`: able to receive a custom validate function to check value.
+Simply provide a json schema and fallback value/function to `vctrl`, compose one or many `vctrl` in other `*ctrl` for structural data.
 
 `vctrl` demo
 
 ```javascript
-import { vctrl, isEq, isType, isGt, or } from 'data-fixer';
+import { vctrl } from 'data-fixer';
 
-// vctrl: (p1: validatorFn|validatorFn[], p2: fallback value)
-const isEq0 = vctrl(isEq(0), 0);
+// vctrl: (p1: JSONSchema, p2: fallback value/function)
+const isGt0 = vctrl({ type: 'number', exclusiveMinimum: 0 }, 1);
 
-const holder1 = isEq0(0);
-holder.valid; // true
-holder.invalid; // false
-holder.getValue(); // 0
+const holder1 = isGt0(0);
+holder1.valid; // false
+holder1.invalid; // true
+holder1.value(); // 1
 
-const holder2 = isEq0(7);
+const holder2 = isGt0(7);
+holder2.valid; // true
+holder2.invalid; // false
+holder2.value(); // 7
+
+// type coercion case
+const isGt0 = vctrl({ type: 'number', exclusiveMinimum: 0 }, 1, { coerceTypes: true });
+
+const holder1 = isGt0('7');
+holder1.valid; // true
+holder1.invalid; // false
+holder1.value(); // '7', ajv only coerce object property
+
+// fallback function
+const fallback = (data: any) => Number.isNaN(+data) ? +data : 1;
+const isNumber = vctrl({ type: 'number' }, fallback);
+
+const holder = isNumber('7');
 holder.valid; // false
 holder.invalid; // true
-holder.getValue(); // 0
-
-const isIndex = vctrl([isType(Number), or([isEq(-1), isGte(0)])], 0);
-
-const holder1 = isIndex(0);
-holder.valid; // true
-holder.invalid; // false
-holder.getValue(); // 0
-
-const holder2 = isIndex(-2);
-holder.valid; // false
-holder.invalid; // true
-holder.getValue(); // 0
-
-// isOneOf is a shorthand of combination of or and isEq
-const isColor1 = vctrl(or([isEq('black'), isEq('red')]));
-const isColor2 = vctrl(isOneOf(['black', 'red']));
+holder.value(); // 7
 ```
 
 `actrl` demo
 
 ```javascript
-import { actrl, vctrl, isType } from 'data-fixer';
+import { actrl, vctrl } from 'data-fixer';
 
-const isNumber = vctrl(isType(Number), 1);
+const isNumber = vctrl({ type: 'number' }, 1);
 const isAllNumber = actrl(isNumber);
 
 const holder = isAllNumber([1, 2, 3, '4']);
 holder.valid; // false
 holder.invalid; // true
-holder.getValue(); // [1, 2, 3, 1]
+holder.value(); // [1, 2, 3, 1];
+```
+
+`rctrl` demo
+
+```javascript
+import { rctrl, vctrl } from 'data-fixer';
+
+const isNumber = vctrl({ type: 'number' }, 1);
+const isAllNumber = rctrl(isNumber);
+
+// rctrl can handle for object that care only for its value type
+const holder = isAllNumber({ a: 1, b: 2, c: 3, d: '4' });
+holder.valid; // false
+holder.invalid; // true
+holder.value(); // { a: 1, b: 2, c: 3, d: 1 }
 ```
 
 `dctrl` demo
 
 ```javascript
-import { dctrl, vctrl, isType } from 'data-fixer';
+import { dctrl, vctrl } from 'data-fixer';
 
-const isNumber = vctrl(isType(Number), 1);
-const isAllNumber = dctrl(isNumber);
-
-// dctrl can handle for object that care only for its value type
-const holder = isAllNumber({ a: 1, b: 2, c: 3, d: '4' });
-holder.valid; // false
-holder.invalid; // true
-holder.getValue(); // { a: 1, b: 2, c: 3, d: 1 }
-```
-
-`octrl` demo
-
-```javascript
-import { octrl, vctrl, isEq, isType } from 'data-fixer';
-
-const isConfig = octrl({
-  version: vctrl(isEq(2), 2),
-  menus: octrl({
-    enabled: vctrl(isType(Boolean), false),
-    clipboard: vctrl(isType(Boolean), true),
+const isConfig = dctrl({
+  version: vctrl({ type: 'number', const: 2 }, 2),
+  menus: dctrl({
+    enabled: vctrl({ type: 'boolean' }, false),
+    clipboard: vctrl({ type: 'boolean' }, true),
   }),
 });
 
 const holder = isConfig({});
 holder.valid; // false
 holder.invalid; // true
-holder.getValue(); // { version: 2, menus: { enabled: false, clipboard: true } }
+holder.value(); // { version: 2, menus: { enabled: false, clipboard: true } }
 ```
 
 `tctrl` demo
 
 ```javascript
-import { tctrl, vctrl, isType } from 'data-fixer';
+import { tctrl, vctrl } from 'data-fixer';
 
-const isNumber = vctrl(isType(Number), 1);
-const isString = vctrl(isType(String), 'a');
-const isNumberString = tctrl([isNumber, isString]);
+const isNumber = vctrl({ type: 'number' }, 1);
+const isString = vctrl({ type: 'string' }, 'a');
+const isNumberString = tctrl(isNumber, isString);
 
 // tctrl can check tuple type array
 const holder = isNumberString([1, 1]);
 holder.valid; // false
 holder.invalid; // true
-holder.getValue(); // [1, 'a']
+holder.value(); // [1, 'a']
 ```
 
-### Caution
+### More
 
-Becareful for type coercion in JavaScript, for example `isGt(0)('123') === true`, you should handle you self by checking the type correctness.
+Data Fixer is based json schema and ajv, please [check here](https://json-schema.org/understanding-json-schema/index.html) to get more detail about how to use json schema.

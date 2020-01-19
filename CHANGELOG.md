@@ -1,5 +1,19 @@
 # Data Fixer Changelog
 
+### v3.0.0
+BREAKING CHANGE
+v3.0.0 replace all built-in validate functions by json schema and check internally by ajv.
+The changes is huge, but now we can stand on the giant shoulder.
+Another big step improvement is now `dctrl` and `tctrl` has better type defination and output type infer.
+
+- Refactor
+  - `vctrl` apply json schema and ajv to validate.
+- Fix
+  - Correctly define the type of `TupleControl` and `DictionaryControl`.
+- Deprecated
+  - Remove all validator functions instead using json schema.
+  - Rename `getValue` API to `value`.
+
 ### v2.0.0
 - Readme
 - Refactor
