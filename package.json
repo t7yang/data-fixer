@@ -34,15 +34,15 @@
   },
   "dependencies": {
     "@types/json-schema": "^7.0.4",
-    "ajv": "^6.10.2",
+    "ajv": "^6.11.0",
     "ramda": "^0.26.1",
     "ts-toolbelt": "^6.1.6"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.25",
+    "@types/jest": "^24.9.0",
     "@types/ramda": "^0.26.39",
     "jest": "^24.9.0",
     "ts-jest": "^24.3.0",
-    "typescript": "^3.7.4"
+    "typescript": "^3.7.5"
   }
 }
