@@ -1,5 +1,8 @@
 # Data Fixer Changelog
 
+### v3.0.1
+- Update deps.
+
 ### v3.0.0
 BREAKING CHANGE
 v3.0.0 replace all built-in validate functions by json schema and check internally by ajv.
