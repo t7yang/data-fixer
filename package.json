@@ -25,7 +25,7 @@
     "update": "yarn upgradeInteractive",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:tsc": "tsc --noEmit",
+    "test:tsc": "tsc --noEmit --incremental false",
     "clean": "rm -fr dist",
     "build:esm": "tsc --build tsconfig.esm.json",
     "build:cjs": "tsc --build tsconfig.cjs.json",
