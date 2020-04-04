@@ -1,12 +1,13 @@
+import { ajvAdt } from '../adapter';
 import { vctrl } from '../vctrl/vctrl';
 import { dctrl } from './dctrl';
 
 describe('dctrl should pass test', () => {
   const ctrl = dctrl({
-    version: vctrl({ type: 'number', const: 2 }, 2),
+    version: vctrl(ajvAdt({ type: 'number', const: 2 }), 2),
     menus: dctrl({
-      enabled: vctrl({ type: 'boolean' }, false),
-      clipboard: vctrl({ type: 'boolean' }, true),
+      enabled: vctrl(ajvAdt({ type: 'boolean' }), false),
+      clipboard: vctrl(ajvAdt({ type: 'boolean' }), true),
     }),
   });
 

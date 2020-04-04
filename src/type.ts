@@ -15,6 +15,3 @@ export type ExtractControlsValue<I extends Control<any>[], O extends any[] = []>
   0: Cast<ExtractControlsValue<Tail<I>, Prepend<O, ExtractControlValue<Head<I>>>>, any[]>;
   1: Reverse<O>;
 }[Length<I> extends 0 ? 1 : 0];
-
-type T1 = ExtractControlsValue<[Control<string>, Control<number>]>;
-type T2 = Prepend<[1, 2, 3], 0>;

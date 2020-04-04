@@ -1,8 +1,9 @@
+import { ajvAdt } from '../adapter';
 import { vctrl } from '../vctrl/vctrl';
 import { actrl } from './actrl';
 
 describe('test for actrl', () => {
-  const isGt0 = vctrl({ type: 'number', exclusiveMinimum: 0 }, 1);
+  const isGt0 = vctrl(ajvAdt({ type: 'number', exclusiveMinimum: 0 }), 1);
   const isGroupGt0 = actrl(isGt0);
 
   it('actrl should return given value if valid', () => {

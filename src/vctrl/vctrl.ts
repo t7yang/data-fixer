@@ -1,11 +1,11 @@
-import Ajv from 'ajv';
-import { JSONSchema7 } from 'json-schema';
 import { Control } from '../type';
 import { Alt, getAlt } from './get-alt';
 
-export type ValueControl = <T>(schema: JSONSchema7, alt: Alt<T>, opt?: Ajv.Options) => Control<T>;
+export type Vtor = (data: any) => boolean;
 
-export const vctrl: ValueControl = (schema, alt, opt) => data => {
-  const valid = (ajv => ajv.validate(schema, data) as boolean)(Ajv(opt));
+export type ValueControl = <T>(vtor: Vtor, alt: Alt<T>) => Control<T>;
+
+export const vctrl: ValueControl = (vtor, alt) => data => {
+  const valid = vtor(data);
   return { valid, invalid: !valid, value: () => (valid ? data : getAlt(alt, data)) };
 };

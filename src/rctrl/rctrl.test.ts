@@ -1,8 +1,9 @@
+import { ajvAdt } from '../adapter';
 import { vctrl } from '../vctrl/vctrl';
 import { rctrl } from './rctrl';
 
 describe('test for rctrl', () => {
-  const isOnOff = rctrl(vctrl({ type: 'string', enum: ['on', 'off'] }, 'on'));
+  const isOnOff = rctrl(vctrl(ajvAdt({ type: 'string', enum: ['on', 'off'] }), 'on'));
 
   it('rctrl should return given value if valid', () => {
     const holder = isOnOff({ a: 'on', b: 'off', c: 'on' });

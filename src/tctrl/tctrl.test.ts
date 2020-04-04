@@ -1,10 +1,11 @@
+import { ajvAdt } from '../adapter';
 import { vctrl } from '../vctrl/vctrl';
 import { tctrl } from './tctrl';
 
 describe('test for tctrl', () => {
   const isOnOff = tctrl(
-    vctrl({ type: 'string', const: 'on' }, 'on'),
-    vctrl({ type: 'string', const: 'off' }, 'off'),
+    vctrl(ajvAdt({ type: 'string', const: 'on' }), 'on'),
+    vctrl(ajvAdt({ type: 'string', const: 'off' }), 'off'),
   );
 
   it('tctrl should return given value if valid', () => {

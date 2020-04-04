@@ -1,8 +1,9 @@
+import { ajvAdt } from '../adapter';
 import { vctrl } from './vctrl';
 
 describe('test for vctrl when alt if not a function', () => {
   const alt = 1;
-  const isGtZero = vctrl({ type: 'number', exclusiveMinimum: 0 }, alt);
+  const isGtZero = vctrl(ajvAdt({ type: 'number', exclusiveMinimum: 0 }), alt);
 
   it('vctrl should return given value if valid', () => {
     const target = 5;
@@ -23,7 +24,7 @@ describe('test for vctrl when alt if not a function', () => {
 
 describe('test for vctrl when alt is function', () => {
   const altFn = (p: any) => (typeof p === 'number' ? Math.abs(p) + 1 : 1);
-  const isGtZero = vctrl({ type: 'number', minimum: 0 }, altFn);
+  const isGtZero = vctrl(ajvAdt({ type: 'number', minimum: 0 }), altFn);
 
   it('vctrl should return given value if valid', () => {
     const holder = isGtZero(2);
