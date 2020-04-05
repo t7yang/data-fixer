@@ -1,5 +1,13 @@
 # Data Fixer Changelog
 
+### v4.0.0
+BREAKING CHANGE
+To allow using difference schema validator to validate data, a new adapter feature provided in v4.
+
+- Feature
+  - Add `Adapter` feature to let user choose from diffenrece schema validator.
+  - `vctrl` signature from `<T>(schema: JSONSchema7, alt: T, opt?: Ajv.options) => Control<T>` to `<T>(vtor: Vtor, alt: T) => Control<T>` which `Vtor` is `(data: any) => boolean`.
+
 ### v3.0.1
 - Update deps.
 
