@@ -1,10 +1,11 @@
+import Ajv from 'ajv';
 import * as yup from 'yup';
 import { ajvAdt, yupAdt } from '../adapter';
 import { vctrl } from './vctrl';
 
 describe('test for vctrl when alt if not a function', () => {
   const alt = 1;
-  const isGt0Ajv = vctrl(ajvAdt({ type: 'number', exclusiveMinimum: 0 }), alt);
+  const isGt0Ajv = vctrl(ajvAdt(new Ajv().compile({ type: 'number', exclusiveMinimum: 0 })), alt);
   const isGt0Yup = vctrl(yupAdt(yup.number().moreThan(0)), alt);
 
   it('vctrl should return given value if valid', () => {
@@ -38,7 +39,7 @@ describe('test for vctrl when alt if not a function', () => {
 
 describe('test for vctrl when alt is function', () => {
   const altFn = (p: any) => (typeof p === 'number' ? Math.abs(p) + 1 : 1);
-  const isGt0Ajv = vctrl(ajvAdt({ type: 'number', minimum: 0 }), altFn);
+  const isGt0Ajv = vctrl(ajvAdt(new Ajv().compile({ type: 'number', minimum: 0 })), altFn);
   const isGt0Yup = vctrl(yupAdt(yup.number().min(0)), altFn);
 
   it('vctrl should return given value if valid', () => {

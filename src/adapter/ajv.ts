@@ -1,7 +1,4 @@
-import Ajv, { Options } from 'ajv';
-import { JSONSchema7 } from 'json-schema';
+import { ValidateFunction } from 'ajv';
 import { Vtor } from '../vctrl';
 
-export const ajvAdt = (schema: JSONSchema7, opt?: Options): Vtor => data => {
-  return (ajv => ajv.validate(schema, data) as boolean)(Ajv(opt));
-};
+export const ajvAdt = (vldFn: ValidateFunction): Vtor => data => vldFn(data) as boolean;

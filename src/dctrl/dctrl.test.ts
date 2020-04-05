@@ -1,13 +1,14 @@
+import Ajv from 'ajv';
 import { ajvAdt } from '../adapter';
 import { vctrl } from '../vctrl/vctrl';
 import { dctrl } from './dctrl';
 
 describe('dctrl should pass test', () => {
   const ctrl = dctrl({
-    version: vctrl(ajvAdt({ type: 'number', const: 2 }), 2),
+    version: vctrl(ajvAdt(new Ajv().compile({ type: 'number', const: 2 })), 2),
     menus: dctrl({
-      enabled: vctrl(ajvAdt({ type: 'boolean' }), false),
-      clipboard: vctrl(ajvAdt({ type: 'boolean' }), true),
+      enabled: vctrl(ajvAdt(new Ajv().compile({ type: 'boolean' })), false),
+      clipboard: vctrl(ajvAdt(new Ajv().compile({ type: 'boolean' })), true),
     }),
   });
 
