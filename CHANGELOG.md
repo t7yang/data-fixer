@@ -1,5 +1,9 @@
 # Data Fixer Changelog
 
+### v4.0.1
+- Refactor
+  - Rewrite isObject validation function
+
 ### v4.0.0
 BREAKING CHANGE
 To allow using difference schema validator to validate data, a new adapter feature provided in v4.
