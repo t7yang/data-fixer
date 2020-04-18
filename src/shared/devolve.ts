@@ -6,10 +6,7 @@ type Devolve = (
 ) => Record<string, any>;
 
 export const devolve: Devolve = (schema, raw) =>
-  Object.entries(schema).reduce(
-    (obj, [key, value]) => {
-      obj[key] = value(raw[key]);
-      return obj;
-    },
-    {} as Record<string, any>,
-  );
+  Object.entries(schema).reduce((obj, [key, ctrl]) => {
+    obj[key] = ctrl(raw[key]);
+    return obj;
+  }, {} as Record<string, any>);
