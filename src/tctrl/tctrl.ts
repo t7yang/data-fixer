@@ -10,8 +10,7 @@ export const tctrl: TupleControl = (...ctrls) => data => {
 
   const valid = isLengthMatch && holders.every(h => h.valid);
   const invalid = !valid;
-  const value = () =>
-    holders.map(h => h.value()) as typeof ctrls extends Control<infer R>[] ? R[] : never;
+  const value = () => holders.map(h => h.value()) as typeof ctrls extends Control<infer R>[] ? R[] : never;
 
   return { valid, invalid, value };
 };
