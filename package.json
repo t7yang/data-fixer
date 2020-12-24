@@ -1,6 +1,6 @@
 {
   "name": "data-fixer",
-  "version": "4.0.2",
+  "version": "5.0.0",
   "description": "a tool to check and fix data with schema, inspired by angular reactive form.",
   "author": "t7yang <t7yang@gmail.com>",
   "license": "MIT",
