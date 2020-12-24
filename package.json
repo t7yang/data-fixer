@@ -32,15 +32,9 @@
     "build:all": "npm run build:esm && npm run build:cjs",
     "build": "npm run clean && npm run build:all"
   },
-  "dependencies": {
-    "@types/json-schema": "^7.0.4",
-    "@types/yup": "^0.29.7",
-    "ramda": "^0.27.0",
-    "ts-toolbelt": "^8.0.6"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^26.0.14",
-    "@types/ramda": "^0.27.3",
     "ajv": "^7.0.2",
     "jest": "^26.4.2",
     "prettier": "^2.1.2",
