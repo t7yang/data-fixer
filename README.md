@@ -64,10 +64,10 @@ holder1.value(); // '7', ajv only coerce object property
 const fallback = (data: any) => Number.isNaN(+data) ? +data : 1;
 const isNumber = vctrl(ajvAdt({ type: 'number' }), fallback);
 
-const holder = isNumber('7');
+const holder = isNumber('foo');
 holder.valid; // false
 holder.invalid; // true
-holder.value(); // 7
+holder.value(); // 1
 ```
 
 `actrl` demo
