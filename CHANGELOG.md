@@ -2,6 +2,10 @@
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [5.0.1] - 2021-07-12
+
+Bump deps version for security issues.
+
 ## [5.0.0] - 2020-12-24
 
 A bump for major version due applying recursive types and variadic tuple types in TypeScript 4.1.3.
